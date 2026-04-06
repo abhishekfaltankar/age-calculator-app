@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <meta name="description" content="Calculate your age easily with this smooth and simple age calculator.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="theme-btn" aria-label="Toggle Dark/Light Mode">
+            <!-- Sun icon for light mode toggle -->
+            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            </svg>
+            <!-- Moon icon for dark mode toggle -->
+            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="calculator-card">
+            <h1>Age Calculator</h1>
+            <p class="subtitle">Enter your date of birth to see how long you've been shining!</p>
+            <div class="input-group">
+                <input type="date" id="dob-input" max="" aria-label="Date of Birth">
+                <button id="calculate-btn" class="primary-btn">Calculate Age</button>
+            </div>
+            <div id="result" class="result empty">
+                <div class="result-box">
+                    <span id="years">--</span>
+                    <p>Years</p>
+                </div>
+                <div class="result-box">
+                    <span id="months">--</span>
+                    <p>Months</p>
+                </div>
+                <div class="result-box">
+                    <span id="days">--</span>
+                    <p>Days</p>
+                </div>
+                <div class="result-box">
+                    <span id="hours">--</span>
+                    <p>Hours</p>
+                </div>
+                <div class="result-box">
+                    <span id="minutes">--</span>
+                    <p>Mins</p>
+                </div>
+                <div class="result-box">
+                    <span id="seconds">--</span>
+                    <p>Secs</p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <a href="https://instagram.com/abhishek33x" target="_blank" class="social-link" id="ig-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <span>Instagram</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
