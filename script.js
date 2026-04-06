@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeBtn = document.getElementById('theme-btn');
     const sunIcon = document.getElementById('sun-icon');
     const moonIcon = document.getElementById('moon-icon');
+    const extraStats = document.getElementById('extra-stats');
+    const nextBirthdayElement = document.getElementById('next-birthday');
+    const totalDaysElement = document.getElementById('total-days');
+    const funFactElement = document.getElementById('fun-fact');
 
     let liveTimer = null;
 
@@ -54,14 +58,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function startCalculation() {
+        if (dobInput.validity && dobInput.validity.badInput) {
+            showAlert('Please enter a valid date!');
+            return;
+        }
+
         if (!dobInput.value) {
             showAlert('Please select your date of birth!');
             return;
         }
 
         const dobParts = dobInput.value.split('-');
+        const year = parseInt(dobParts[0], 10);
+        const month = parseInt(dobParts[1], 10) - 1;
+        const day = parseInt(dobParts[2], 10);
+
         // Use local timezone midnight
-        const dobDate = new Date(dobParts[0], dobParts[1] - 1, dobParts[2], 0, 0, 0);
+        const dobDate = new Date();
+        dobDate.setFullYear(year, month, day);
+        dobDate.setHours(0, 0, 0, 0);
+
+        // Check for invalid dates (e.g., 31 Feb)
+        if (
+            dobDate.getFullYear() !== year ||
+            dobDate.getMonth() !== month ||
+            dobDate.getDate() !== day
+        ) {
+            showAlert('Please enter a valid date!');
+            return;
+        }
+
         const currentDate = new Date();
 
         if (dobDate > currentDate) {
@@ -76,6 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Show results box directly
         resultDiv.classList.remove('empty');
+        
+        extraStats.classList.remove('hidden');
+        // Force reflow
+        void extraStats.offsetWidth;
+        extraStats.classList.add('visible');
         
         // Add animation class to pulsate 
         const resultBoxes = document.querySelectorAll('.result-box');
@@ -92,6 +123,45 @@ document.addEventListener('DOMContentLoaded', () => {
         liveTimer = setInterval(() => {
             updateAge(dobDate, false);
         }, 1000);
+
+        calculateExtraStats(dobDate, currentDate);
+    }
+
+    function calculateExtraStats(dobDate, currentDate) {
+        // Total days
+        const diffTime = currentDate.getTime() - dobDate.getTime();
+        const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        totalDaysElement.textContent = totalDays.toLocaleString();
+
+        // Next Birthday
+        let nextBday = new Date(currentDate.getFullYear(), dobDate.getMonth(), dobDate.getDate());
+        // Standardize the current time for the comparison
+        let currentDayZeroTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+        
+        if (nextBday < currentDayZeroTime) {
+            nextBday.setFullYear(currentDate.getFullYear() + 1);
+        }
+        
+        const daysToBday = Math.floor((nextBday - currentDayZeroTime) / (1000 * 60 * 60 * 24));
+        
+        if (daysToBday === 0) {
+            nextBirthdayElement.textContent = "Today! 🎉";
+        } else if (daysToBday === 1) {
+            nextBirthdayElement.textContent = "Tomorrow! 🎈";
+        } else {
+            nextBirthdayElement.textContent = `In ${daysToBday} days`;
+        }
+
+        // Fun Fact
+        const facts = [
+            `Your heart has beaten approximately ${(totalDays * 115200).toLocaleString()} times.`,
+            `You've taken about ${(totalDays * 23040).toLocaleString()} breaths.`,
+            `You've slept for roughly ${(totalDays / 3).toFixed(0)} days of your life.`,
+            `You've blinked around ${(totalDays * 28800).toLocaleString()} times.`,
+            `The earth has traveled ${(totalDays * 2.59).toLocaleString(undefined, {maximumFractionDigits: 1})} million km around the sun since your birth.`
+        ];
+        const randomFact = facts[Math.floor(Math.random() * facts.length)];
+        funFactElement.textContent = randomFact;
     }
 
     function updateAge(dobDate, useAnimation) {
