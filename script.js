@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBirthdayElement = document.getElementById('next-birthday');
     const totalDaysElement = document.getElementById('total-days');
     const funFactElement = document.getElementById('fun-fact');
+    const historyContainer = document.getElementById('history-container');
 
     let liveTimer = null;
 
@@ -40,6 +41,29 @@ document.addEventListener('DOMContentLoaded', () => {
             moonIcon.style.display = 'none';
         }
     });
+
+    // History logic
+    let ageHistory = JSON.parse(localStorage.getItem('ageHistory')) || [];
+    renderHistory();
+
+    function renderHistory() {
+        if (ageHistory.length === 0) {
+            historyContainer.classList.add('history-hidden');
+            return;
+        }
+        historyContainer.classList.remove('history-hidden');
+        historyContainer.innerHTML = '';
+        ageHistory.forEach(dateStr => {
+            const tag = document.createElement('span');
+            tag.className = 'history-tag';
+            tag.textContent = dateStr;
+            tag.addEventListener('click', () => {
+                dobInput.value = dateStr;
+                startCalculation();
+            });
+            historyContainer.appendChild(tag);
+        });
+    }
 
     // Set max date to today
     const today = new Date();
@@ -93,6 +117,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dobDate > currentDate) {
             showAlert('Date of birth cannot be in the future!');
             return;
+        }
+
+        // Save to history
+        const dateString = dobInput.value;
+        if (!ageHistory.includes(dateString)) {
+            ageHistory.unshift(dateString);
+            if (ageHistory.length > 5) {
+                ageHistory.pop();
+            }
+            localStorage.setItem('ageHistory', JSON.stringify(ageHistory));
+            renderHistory();
         }
 
         // Clear existing timer if any

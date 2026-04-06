@@ -1,9 +1,9 @@
 :root {
-    --bg-gradient: linear-gradient(135deg, #0d0d0d, #1a1a1a, #000000);
+    --bg-gradient: linear-gradient(135deg, #11141e, #1a1e2d, #131722);
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-border: rgba(255, 255, 255, 0.1);
-    --text-color: #fff;
-    --subtitle-color: #b0a3c2;
+    --text-color: #f1f5f9;
+    --subtitle-color: #a4b1cd;
     --input-bg: rgba(0, 0, 0, 0.2);
     --input-border: rgba(255, 255, 255, 0.2);
     --calendar-invert: 1;
@@ -17,11 +17,11 @@
 }
 
 body.light-mode {
-    --bg-gradient: linear-gradient(135deg, #f0f4f8, #d9e2ec, #bcccdc);
+    --bg-gradient: linear-gradient(135deg, #fdfbfb, #f4f6fa, #ecf1f6);
     --card-bg: rgba(255, 255, 255, 0.6);
     --card-border: rgba(255, 255, 255, 0.8);
-    --text-color: #102a43;
-    --subtitle-color: #486581;
+    --text-color: #1e293b;
+    --subtitle-color: #52637a;
     --input-bg: rgba(255, 255, 255, 0.9);
     --input-border: rgba(16, 42, 67, 0.15);
     --calendar-invert: 0;
@@ -406,4 +406,37 @@ input[type="date"]:focus {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-color);
+}
+
+.history-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: -15px;
+    margin-bottom: 25px;
+}
+
+.history-hidden {
+    display: none !important;
+}
+
+.history-tag {
+    background: var(--theme-btn-bg);
+    color: var(--subtitle-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--input-border);
+}
+
+.history-tag:hover {
+    background: var(--theme-btn-hover);
+    color: var(--text-color);
+    border-color: #e52e71;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(229, 46, 113, 0.2);
 }
