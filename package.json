@@ -1,0 +1,23 @@
+{
+  "name": "age-calculator-app",
+  "version": "1.0.0",
+  "description": "Calculate your age easily with this smooth and simple age calculator",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishekfaltankar/age-calculator-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhishekfaltankar/age-calculator-app/issues"
+  },
+  "homepage": "https://github.com/abhishekfaltankar/age-calculator-app#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
